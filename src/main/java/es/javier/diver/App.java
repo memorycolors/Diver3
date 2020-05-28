@@ -38,7 +38,7 @@ public class App extends Application {
     short buzoPosY = (short) ((SCENE_HEIGHT - buzoHeight) / 2);
     byte velocidadbuzo = 0;
     int direccionpez = 1;
-    int velocidadtiburon = SCENE_WIDTH;
+    int posicionTiburon = SCENE_WIDTH;
     int direcciontiburon = 1;
     int velocidadpeces = SCENE_WIDTH;
     int peces = 0;
@@ -121,44 +121,43 @@ public class App extends Application {
 
         //pez 2
         // cuerpo del pez
-        Ellipse cuerpopez2 = new Ellipse();
-        {
-            cuerpopez2.setCenterX(20);
-            cuerpopez2.setCenterY(20);
-            cuerpopez2.setRadiusX(20);
-            cuerpopez2.setRadiusY(8);
-            cuerpopez2.setFill(Color.FUCHSIA);
-            root.getChildren().add(cuerpopez2);
-        }
-        //cola del pez 
-        Ellipse colapez2 = new Ellipse();
-        {
-            colapez2.setCenterX(43);
-            colapez2.setCenterY(20);
-            colapez2.setRadiusX(8);
-            colapez2.setRadiusY(4);
-            colapez2.setFill(Color.INDIGO);
-            root.getChildren().add(colapez2);
-        }
-
-        // ojo del pez 
-        Circle ojopez2 = new Circle();
-        {
-            ojopez2.setCenterX(8);
-            ojopez2.setCenterY(15);
-            ojopez2.setRadius(4);
-            ojopez2.setFill(Color.WHITE);
-            root.getChildren().add(ojopez2);
-        }
-
-        // pupila del pez 
-        Circle pupilapez2 = new Circle();
-        pupilapez2.setCenterX(8);
-        pupilapez2.setCenterY(15);
-        pupilapez2.setRadius(2);
-        pupilapez2.setFill(Color.BLACK);
-        root.getChildren().add(pupilapez2);
-
+//        Ellipse cuerpopez2 = new Ellipse();
+//        {
+//            cuerpopez2.setCenterX(20);
+//            cuerpopez2.setCenterY(20);
+//            cuerpopez2.setRadiusX(20);
+//            cuerpopez2.setRadiusY(8);
+//            cuerpopez2.setFill(Color.FUCHSIA);
+//            root.getChildren().add(cuerpopez2);
+//        }
+//        //cola del pez 
+//        Ellipse colapez2 = new Ellipse();
+//        {
+//            colapez2.setCenterX(43);
+//            colapez2.setCenterY(20);
+//            colapez2.setRadiusX(8);
+//            colapez2.setRadiusY(4);
+//            colapez2.setFill(Color.INDIGO);
+//            root.getChildren().add(colapez2);
+//        }
+//
+//        // ojo del pez 
+//        Circle ojopez2 = new Circle();
+//        {
+//            ojopez2.setCenterX(8);
+//            ojopez2.setCenterY(15);
+//            ojopez2.setRadius(4);
+//            ojopez2.setFill(Color.WHITE);
+//            root.getChildren().add(ojopez2);
+//        }
+//
+//        // pupila del pez 
+//        Circle pupilapez2 = new Circle();
+//        pupilapez2.setCenterX(8);
+//        pupilapez2.setCenterY(15);
+//        pupilapez2.setRadius(2);
+//        pupilapez2.setFill(Color.BLACK);
+//        root.getChildren().add(pupilapez2);
         //imagen de bombona de oxigeno (seran las vidas que le queden)
         // imagen de vida 1 
         Image image5 = new Image(getClass().getResourceAsStream("/images/bombona.png"));
@@ -212,17 +211,13 @@ public class App extends Application {
         root.getChildren().add(grupopersonaje);
 
         //grupo de tiburon
-        Group grupotiburon = new Group();
-        //grupotiburon.getChildren().add(rectangletiburon);
-        //grupotiburon.getChildren().add(imagetiburon);       
+        Group grupotiburon = new Group();      
         grupotiburon.setLayoutX(SCENE_WIDTH);
         grupotiburon.setLayoutY(365);
         root.getChildren().add(grupotiburon);
 
         //Rectangulo tiburon
         Rectangle rectangletiburon = new Rectangle();
-        //rectangletiburon.setX(420);
-        //rectangletiburon.setY(365);
         rectangletiburon.setWidth(130);
         rectangletiburon.setHeight(60);
         rectangletiburon.setVisible(false);
@@ -231,8 +226,6 @@ public class App extends Application {
         //imagen tiburon        
         Image image4 = new Image(getClass().getResourceAsStream("/images/tiburon.png"));
         ImageView imagetiburon = new ImageView(image4);
-        //imagetiburon.setX(420); 
-        //imagetiburon.setY(365);
         imagetiburon.setFitHeight(60);
         imagetiburon.setFitWidth(130);
         grupotiburon.getChildren().add(imagetiburon);
@@ -246,12 +239,12 @@ public class App extends Application {
         root.getChildren().add(grupopez);
 
         //grupo del pez 2
-        Group grupopez2 = new Group();
-        grupopez2.getChildren().add(cuerpopez2);
-        grupopez2.getChildren().add(ojopez2);
-        grupopez2.getChildren().add(pupilapez2);
-        grupopez2.getChildren().add(colapez2);
-        root.getChildren().add(grupopez2);
+//        Group grupopez2 = new Group();
+//        grupopez2.getChildren().add(cuerpopez2);
+//        grupopez2.getChildren().add(ojopez2);
+//        grupopez2.getChildren().add(pupilapez2);
+//        grupopez2.getChildren().add(colapez2);
+//        root.getChildren().add(grupopez2);
 
         // Panel para mostrar los textos (puntuaciones)
         HBox paneTextScore = new HBox();
@@ -333,10 +326,10 @@ public class App extends Application {
                         //animacion tiburones Y peces 
                         //animacion del tiburon 
                         if (grupotiburon.getLayoutX() > (-image4.getWidth())) {
-                            velocidadtiburon -= 3;
-                            grupotiburon.setLayoutX(velocidadtiburon);
+                            posicionTiburon -= 3;
+                            grupotiburon.setLayoutX(posicionTiburon);
                         } else {
-                            velocidadtiburon = SCENE_WIDTH;
+                            posicionTiburon = SCENE_WIDTH;
                             grupotiburon.setLayoutX(SCENE_WIDTH);
                         }
 
@@ -357,24 +350,30 @@ public class App extends Application {
 //                            velocidadpeces = SCENE_WIDTH;
 //                            grupopez2.setLayoutX(SCENE_WIDTH);
 //                        }
-                        // colision de buzo , tiburones y peces 
-                        // colision tiburon quita primera bombona 
+                        // colision tiburon quita las vidas (son bombonas)
                         Shape shapeCollision = Shape.intersect(rectanglepersonaje, rectangletiburon);
                         boolean colisionVacia = shapeCollision.getBoundsInLocal().isEmpty();
-                        if (colisionVacia == false && direcciontiburon == 1 && vidas == 3) {
+                      
+                        
+                        if (colisionVacia == false && vidas == 3) {
                             grupotiburon.setLayoutX(SCENE_WIDTH);
-                            direcciontiburon = 0;
                             vidas--;
                             imagebombona1.setVisible(false);
                             System.out.println(vidas);
-
-                            if (colisionVacia == false && direcciontiburon == 1 && vidas == 2) {
-                                grupotiburon.setLayoutX(SCENE_WIDTH);
-                                direcciontiburon = 0;
-                                vidas--;
-                                imagebombona2.setVisible(false);
-                                System.out.println(vidas);
-                            }
+                        //quiero que el tiburon vuelva a la posicon 640 
+                           // grupotiburon.setLayoutX();
+                        }
+                        if (colisionVacia == false && vidas == 2) {
+                            grupotiburon.setLayoutX(SCENE_WIDTH);
+                            vidas--;
+                            imagebombona2.setVisible(false);
+                            System.out.println(vidas);
+                        }
+                        if (colisionVacia == false && vidas == 1) {
+                            grupotiburon.setLayoutX(SCENE_WIDTH);
+                            vidas--;
+                            imagebombona3.setVisible(false);
+                            System.out.println(vidas);
                         }
                         //colision con el pez naranja 
                         Shape shapeCollision2 = Shape.intersect(rectanglepersonaje, cuerpopez);
@@ -387,16 +386,7 @@ public class App extends Application {
                             textScore.setText(String.valueOf(score));
 
                         }
-//                        Shape shapeCollision3 = Shape.intersect(rectanglepersonaje, cuerpopez2);
-//                        boolean colisionVacia3 = shapeCollision2.getBoundsInLocal().isEmpty();
-//                        if (colisionVacia3 == false&& direcciontiburon == 1) {
-//                             
-//                            direcciontiburon = 0;
-//                            vidas--;
-//                            imagebombona1.setVisible(false);
-//                            
-//                            System.out.println(colisionVacia);
-//                        }
+
                     }
                 }
                 )
