@@ -1,5 +1,6 @@
 package es.javier.diver;
 
+import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -353,25 +354,38 @@ public class App extends Application {
                         // colision tiburon quita las vidas (son bombonas)
                         Shape shapeCollision = Shape.intersect(rectanglepersonaje, rectangletiburon);
                         boolean colisionVacia = shapeCollision.getBoundsInLocal().isEmpty();
-                      
-                        
-                        if (colisionVacia == false && vidas == 3) {
-                            grupotiburon.setLayoutX(SCENE_WIDTH);
-                            vidas--;
-                            imagebombona1.setVisible(false);
-                            System.out.println(vidas);
-                        //quiero que el tiburon vuelva a la posicon 640 
-                           // grupotiburon.setLayoutX();
+                        //DESCONTAR LA VIDA CUANDO HA COLISIONADO
+                        if (colisionVacia == false  ){
+                            vidas --;
+                            Random aleatorio = new Random();
+                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            grupotiburon.setLayoutY(valorRandom);
                         }
                         if (colisionVacia == false && vidas == 2) {
-                            grupotiburon.setLayoutX(SCENE_WIDTH);
-                            vidas--;
-                            imagebombona2.setVisible(false);
+                            posicionTiburon =SCENE_WIDTH;
+                            imagebombona1.setVisible(false);
+                            Random aleatorio = new Random();
+                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            grupotiburon.setLayoutY(valorRandom);
                             System.out.println(vidas);
+                        //quiero que el tiburon vuelva a la posicon 640 
+                           // 
                         }
                         if (colisionVacia == false && vidas == 1) {
-                            grupotiburon.setLayoutX(SCENE_WIDTH);
-                            vidas--;
+                            posicionTiburon =SCENE_WIDTH;
+                            imagebombona2.setVisible(false);
+                            
+                            Random aleatorio = new Random();
+                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            grupotiburon.setLayoutY(valorRandom);
+                            System.out.println(vidas);
+                        }
+                        if (colisionVacia == false && vidas == 0) {
+                            posicionTiburon =SCENE_WIDTH;
+                            
+                            Random aleatorio = new Random();
+                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            grupotiburon.setLayoutY(valorRandom);
                             imagebombona3.setVisible(false);
                             System.out.println(vidas);
                         }
@@ -380,7 +394,11 @@ public class App extends Application {
                         boolean colisionVacia2 = shapeCollision2.getBoundsInLocal().isEmpty();
                         if (colisionVacia2 == false) {
                             direccionpez = 0;
-
+                            
+                            Random aleatorio = new Random();
+                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            grupopez.setLayoutY(valorRandom);
+                            
                             System.out.println(colisionVacia);
                             score++;
                             textScore.setText(String.valueOf(score));
