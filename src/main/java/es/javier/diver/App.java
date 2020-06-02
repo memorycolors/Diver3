@@ -45,9 +45,10 @@ public class App extends Application {
     int peces = 0;
     int vidas = 3;
 
-    // textos para la puntuaciones 
+    // textos para la puntuaciones y game OVer
     Text textScore;
     Text textHighScore;
+
     // Puntuación actual
     int score = 0;
     // Puntuación máxima
@@ -120,46 +121,6 @@ public class App extends Application {
         pupilapez.setFill(Color.BLACK);
         root.getChildren().add(pupilapez);
 
-        //pez 2
-        // cuerpo del pez
-//        Ellipse cuerpopez2 = new Ellipse();
-//        {
-//            cuerpopez2.setCenterX(20);
-//            cuerpopez2.setCenterY(20);
-//            cuerpopez2.setRadiusX(20);
-//            cuerpopez2.setRadiusY(8);
-//            cuerpopez2.setFill(Color.FUCHSIA);
-//            root.getChildren().add(cuerpopez2);
-//        }
-//        //cola del pez 
-//        Ellipse colapez2 = new Ellipse();
-//        {
-//            colapez2.setCenterX(43);
-//            colapez2.setCenterY(20);
-//            colapez2.setRadiusX(8);
-//            colapez2.setRadiusY(4);
-//            colapez2.setFill(Color.INDIGO);
-//            root.getChildren().add(colapez2);
-//        }
-//
-//        // ojo del pez 
-//        Circle ojopez2 = new Circle();
-//        {
-//            ojopez2.setCenterX(8);
-//            ojopez2.setCenterY(15);
-//            ojopez2.setRadius(4);
-//            ojopez2.setFill(Color.WHITE);
-//            root.getChildren().add(ojopez2);
-//        }
-//
-//        // pupila del pez 
-//        Circle pupilapez2 = new Circle();
-//        pupilapez2.setCenterX(8);
-//        pupilapez2.setCenterY(15);
-//        pupilapez2.setRadius(2);
-//        pupilapez2.setFill(Color.BLACK);
-//        root.getChildren().add(pupilapez2);
-        //imagen de bombona de oxigeno (seran las vidas que le queden)
         // imagen de vida 1 
         Image image5 = new Image(getClass().getResourceAsStream("/images/bombona.png"));
         ImageView imagebombona1 = new ImageView(image5);
@@ -212,9 +173,11 @@ public class App extends Application {
         root.getChildren().add(grupopersonaje);
 
         //grupo de tiburon
-        Group grupotiburon = new Group();      
+        Group grupotiburon = new Group();
         grupotiburon.setLayoutX(SCENE_WIDTH);
-        grupotiburon.setLayoutY(365);
+        Random aleatoriotiburon = new Random();
+        int Randomtiburon = aleatoriotiburon.nextInt(SCENE_HEIGHT - 60);
+        grupotiburon.setLayoutY(Randomtiburon);
         root.getChildren().add(grupotiburon);
 
         //Rectangulo tiburon
@@ -231,23 +194,18 @@ public class App extends Application {
         imagetiburon.setFitWidth(130);
         grupotiburon.getChildren().add(imagetiburon);
 
-        //grupo del pez 1
+        //grupo del pez 
         Group grupopez = new Group();
         grupopez.getChildren().add(cuerpopez);
         grupopez.getChildren().add(ojopez);
         grupopez.getChildren().add(pupilapez);
         grupopez.getChildren().add(colapez);
+        Random aleatoriopez = new Random();
+        int valorRandompez = aleatoriopez.nextInt(SCENE_HEIGHT);
+        grupopez.setLayoutY(valorRandompez);
         root.getChildren().add(grupopez);
 
-        //grupo del pez 2
-//        Group grupopez2 = new Group();
-//        grupopez2.getChildren().add(cuerpopez2);
-//        grupopez2.getChildren().add(ojopez2);
-//        grupopez2.getChildren().add(pupilapez2);
-//        grupopez2.getChildren().add(colapez2);
-//        root.getChildren().add(grupopez2);
-
-        // Panel para mostrar los textos (puntuaciones)
+        // Panel para mostrar los textos (puntuaciones) 
         HBox paneTextScore = new HBox();
         paneTextScore.setTranslateY(20);
         paneTextScore.setMinWidth(SCENE_WIDTH);
@@ -343,62 +301,63 @@ public class App extends Application {
                             grupopez.setLayoutX(SCENE_WIDTH);
                         }
 
-                        // animacipon del pez 2 (rosa)
-//                        if (grupopez2.getLayoutX() > (-image4.getWidth())) {
-//                            velocidadpeces -= 1;
-//                            grupopez2.setLayoutX(velocidadpeces);
-//                        } else {
-//                            velocidadpeces = SCENE_WIDTH;
-//                            grupopez2.setLayoutX(SCENE_WIDTH);
-//                        }
                         // colision tiburon quita las vidas (son bombonas)
                         Shape shapeCollision = Shape.intersect(rectanglepersonaje, rectangletiburon);
                         boolean colisionVacia = shapeCollision.getBoundsInLocal().isEmpty();
                         //DESCONTAR LA VIDA CUANDO HA COLISIONADO
-                        if (colisionVacia == false  ){
-                            vidas --;
+                        if (colisionVacia == false) {
+                            vidas--;
                             Random aleatorio = new Random();
-                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            int valorRandom = aleatorio.nextInt(SCENE_HEIGHT - 60);
                             grupotiburon.setLayoutY(valorRandom);
                         }
                         if (colisionVacia == false && vidas == 2) {
-                            posicionTiburon =SCENE_WIDTH;
+                            posicionTiburon = SCENE_WIDTH;
                             imagebombona1.setVisible(false);
                             Random aleatorio = new Random();
-                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            int valorRandom = aleatorio.nextInt(SCENE_HEIGHT - 60);
                             grupotiburon.setLayoutY(valorRandom);
                             System.out.println(vidas);
-                        //quiero que el tiburon vuelva a la posicon 640 
-                           // 
+                            //quiero que el tiburon vuelva a la posicon 640 
+                            // 
                         }
                         if (colisionVacia == false && vidas == 1) {
-                            posicionTiburon =SCENE_WIDTH;
+                            posicionTiburon = SCENE_WIDTH;
                             imagebombona2.setVisible(false);
-                            
+
                             Random aleatorio = new Random();
-                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            int valorRandom = aleatorio.nextInt(SCENE_HEIGHT - 60);
                             grupotiburon.setLayoutY(valorRandom);
                             System.out.println(vidas);
                         }
                         if (colisionVacia == false && vidas == 0) {
-                            posicionTiburon =SCENE_WIDTH;
-                            
+                            posicionTiburon = SCENE_WIDTH;
+
                             Random aleatorio = new Random();
-                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            int valorRandom = aleatorio.nextInt(SCENE_HEIGHT);
                             grupotiburon.setLayoutY(valorRandom);
                             imagebombona3.setVisible(false);
-                            System.out.println(vidas);
+
+                            //Texto de Game Over
+                            Text textGameOver;
+                            textGameOver = new Text("Game Over");
+                            textGameOver.setLayoutX(250);
+                            textGameOver.setLayoutY(250);
+                            textGameOver.setFont(Font.font(TEXT_SIZE));
+                            textGameOver.setFill(Color.WHITE);
+                            textGameOver.setVisible(true);
+                            root.getChildren().add(textGameOver);
                         }
                         //colision con el pez naranja 
                         Shape shapeCollision2 = Shape.intersect(rectanglepersonaje, cuerpopez);
                         boolean colisionVacia2 = shapeCollision2.getBoundsInLocal().isEmpty();
                         if (colisionVacia2 == false) {
                             direccionpez = 0;
-                            
+
                             Random aleatorio = new Random();
-                            int valorRandom = aleatorio. nextInt(SCENE_HEIGHT );
+                            int valorRandom = aleatorio.nextInt(SCENE_HEIGHT);
                             grupopez.setLayoutY(valorRandom);
-                            
+
                             System.out.println(colisionVacia);
                             score++;
                             textScore.setText(String.valueOf(score));
